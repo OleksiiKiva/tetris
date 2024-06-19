@@ -55,6 +55,8 @@ while True:
                 dx = -1
             elif event.key == pygame.K_RIGHT:
                 dx = 1
+            elif event.key == pygame.K_DOWN:
+                anim_limit = 100
 
     # move x
     figure_old = deepcopy(figure)
@@ -73,10 +75,12 @@ while True:
             figure[i].y += 1
             if not check_borders():
                 figure = deepcopy(figure_old)
+                anim_limit = 2000
                 break
 
     # draw grid
     [pygame.draw.rect(game_sc, (40, 40, 40), i_rect, 1) for i_rect in grid]
+
     # draw figure
     for i in range(4):
         figure_rect.x = figure[i].x * TILE
