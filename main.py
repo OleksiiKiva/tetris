@@ -33,11 +33,19 @@ figure_rect = pygame.Rect(0, 0, TILE - 2, TILE - 2)
 figure = figures[0]
 
 while True:
+    dx = 0
     game_sc.fill(pygame.Color("black"))
 
+    # control
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                dx = -1
+            elif event.key == pygame.K_RIGHT:
+                dx = 1
+
     # draw grid
     [pygame.draw.rect(game_sc, (40, 40, 40), i_rect, 1) for i_rect in grid]
     # draw figure
