@@ -1,6 +1,8 @@
 import pygame
 
-GAME_RES = 800, 600
+W, H = 10, 20
+TILE = 45
+GAME_RES = W * TILE, H * TILE
 
 pygame.init()
 game_sc = pygame.display.set_mode(GAME_RES)
