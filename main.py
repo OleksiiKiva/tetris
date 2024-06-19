@@ -48,7 +48,7 @@ def check_borders():
 
 
 while True:
-    dx = 0
+    dx, rot = 0
     game_sc.fill(pygame.Color("black"))
 
     # control
