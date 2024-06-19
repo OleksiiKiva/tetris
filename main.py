@@ -1,5 +1,6 @@
 import pygame
 from copy import deepcopy
+from random import choice, randrange
 
 W, H = 10, 20
 TILE = 30
@@ -31,13 +32,17 @@ figures = [
 ]
 figure_rect = pygame.Rect(0, 0, TILE - 2, TILE - 2)
 
+field = [[0 for i in range(W)] for j in range(H)]
+
 anim_count, anim_speed, anim_limit = 0, 60, 2000
 
-figure = deepcopy(figures[3])
+figure = deepcopy(choice(figures))
 
 
 def check_borders():
     if figure[i].x < 0 or figure[i].x > W - 1:
+        return False
+    elif figure[i].y > H - 1 or field[figure[i].y][figure[i].x]:
         return False
     return True
 
@@ -74,7 +79,9 @@ while True:
         for i in range(4):
             figure[i].y += 1
             if not check_borders():
-                figure = deepcopy(figure_old)
+                for i in range(4):
+                    field[figure[i].y][figure[i].x] = pygame.Color("white")
+                figure = deepcopy(choice(figures))
                 anim_limit = 2000
                 break
 
