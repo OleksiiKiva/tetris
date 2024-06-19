@@ -80,7 +80,9 @@ while True:
             figure[i].y += 1
             if not check_borders():
                 for i in range(4):
-                    field[figure[i].y][figure[i].x] = pygame.Color("white")
+                    field[figure_old[i].y][figure_old[i].x] = pygame.Color(
+                        "white"
+                    )
                 figure = deepcopy(choice(figures))
                 anim_limit = 2000
                 break
@@ -93,6 +95,13 @@ while True:
         figure_rect.x = figure[i].x * TILE
         figure_rect.y = figure[i].y * TILE
         pygame.draw.rect(game_sc, pygame.Color("white"), figure_rect)
+
+    # draw figure
+    for y, raw in enumerate(field):
+        for x, col in enumerate(raw):
+            if col:
+                figure_rect.x, figure_rect.y = x * TILE, y * TILE
+                pygame.draw.rect(game_sc, col, figure_rect)
 
     pygame.display.flip()
     clock.tick(FPS)
