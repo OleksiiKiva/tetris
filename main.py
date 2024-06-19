@@ -46,6 +46,10 @@ while True:
             elif event.key == pygame.K_RIGHT:
                 dx = 1
 
+    # move x
+    for i in range(4):
+        figure[i].x += dx
+
     # draw grid
     [pygame.draw.rect(game_sc, (40, 40, 40), i_rect, 1) for i_rect in grid]
     # draw figure
