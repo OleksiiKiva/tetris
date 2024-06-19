@@ -1,7 +1,7 @@
 import pygame
 
 W, H = 10, 20
-TILE = 35
+TILE = 30
 GAME_RES = W * TILE, H * TILE
 FPS = 60
 
@@ -14,6 +14,23 @@ grid = [
     for x in range(W)
     for y in range(H)
 ]
+figures_pos = [
+    [(-1, 0), (-2, 0), (0, 0), (1, 0)],
+    [(0, -1), (-1, -1), (-1, 0), (0, 0)],
+    [(-1, 0), (-1, 1), (0, 0), (0, -1)],
+    [(0, 0), (-1, 0), (0, 1), (-1, -1)],
+    [(0, 0), (0, -1), (0, 1), (-1, -1)],
+    [(0, 0), (0, -1), (0, 1), (-1, -1)],
+    [(0, 0), (0, -1), (0, 1), (-1, 0)],
+]
+
+figures = [
+    [pygame.Rect(x + W // 2, y + 1, 1, 1) for x, y in fig_pos]
+    for fig_pos in figures_pos
+]
+figure_rect = pygame.Rect(0, 0, TILE - 2, TILE - 2)
+
+figure = figures[0]
 
 while True:
     game_sc.fill(pygame.Color("black"))
@@ -23,6 +40,11 @@ while True:
             exit()
     # draw grid
     [pygame.draw.rect(game_sc, (40, 40, 40), i_rect, 1) for i_rect in grid]
+    # draw figure
+    for i in range(4):
+        figure_rect.x = figure[i].x * TILE
+        figure_rect.y = figure[i].y * TILE
+        pygame.draw.rect(game_sc, pygame.Color("white"), figure_rect)
 
     pygame.display.flip()
     clock.tick(FPS)
