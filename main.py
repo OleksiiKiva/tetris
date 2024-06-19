@@ -31,6 +31,8 @@ figures = [
 ]
 figure_rect = pygame.Rect(0, 0, TILE - 2, TILE - 2)
 
+anim_count, anim_speed, anim_limit = 0, 60, 2000
+
 figure = deepcopy(figures[3])
 
 
@@ -61,6 +63,17 @@ while True:
         if not check_borders():
             figure = deepcopy(figure_old)
             break
+
+    # move y
+    anim_count += anim_speed
+    if anim_count > anim_limit:
+        anim_count = 0
+        figure_old = deepcopy(figure)
+        for i in range(4):
+            figure[i].y += 1
+            if not check_borders():
+                figure = deepcopy(figure_old)
+                break
 
     # draw grid
     [pygame.draw.rect(game_sc, (40, 40, 40), i_rect, 1) for i_rect in grid]
